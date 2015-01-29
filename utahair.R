@@ -35,9 +35,19 @@ library(ggplot2)
 
 slcair <- airdata[airdata$City.Name == "Salt Lake City",]
 
+hawthorneair <- airdata[airdata$Local.Site.Name == "Hawthorne",]
+
 qplot(Date.Local, Arithmetic.Mean, data = slcair, geom = c("point", "smooth"), xlab = "Date", ylab = "PM2.5", main = "Salt Lake City PM2.5")
-ggsave("slctrend.png")
 
 qplot(factor(year(Date.Local)), Arithmetic.Mean, data = slcair, geom = "boxplot", xlab = "Year", ylab = "PM2.5", main = "Salt Lake City PM2.5")
-ggsave("slcboxplot.png")
+
+qplot(Date.Local, Arithmetic.Mean, data = airdata, colour = County.Name, geom = "smooth", se = FALSE)
+
+qplot(Date.Local, Arithmetic.Mean, data = slcair, geom = "smooth", se = FALSE, xlab = "Date", ylab = "PM2.5", title = "Sale Lake City Trend")
+
+qplot(Date.Local, Arithmetic.Mean, data = hawthorneair, geom = "smooth", se = FALSE, xlab = "Date", ylab = "PM2.5", title = "Sale Lake City Trend")
+
+qplot(factor(month(Date.Local)), Arithmetic.Mean, data = hawthorneair, geom = "boxplot")
+
+qplot(factor(County.Name), Arithmetic.Mean, data = airdata, geom = "boxplot")
 
